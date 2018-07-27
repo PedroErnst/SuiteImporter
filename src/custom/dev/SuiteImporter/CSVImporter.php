@@ -100,15 +100,7 @@ class CSVImporter
             $this->header = fgetcsv($file);
             $fieldsPerRow = count($this->header);
 
-            if ($this->parameters['showUnmapped']) {
-                echo "Unmapped fields:<br /><br />";
-                foreach ($this->header as $fieldName) {
-                    if (!array_key_exists($fieldName, $this->coreFields)
-                        && !array_key_exists($fieldName, $this->customFields)) {
-                        echo "$fieldName<br />";
-                    }
-                }
-            }
+            $this->showUnmapped();
 
             $failedRows = 0;
             while ($row = fgetcsv($file)) {
@@ -151,6 +143,24 @@ class CSVImporter
         echo "<br />Total rows: <br />";
         echo "Inserted: $successRows<br />";
         echo "Failed: $failedRows<br />";
+    }
+
+    /**
+     *
+     */
+    private function showUnmapped()
+    {
+        if (!$this->parameters['showUnmapped']) {
+            return;
+        }
+
+        echo "Unmapped fields:<br /><br />";
+        foreach ($this->header as $fieldName) {
+            if (!array_key_exists($fieldName, $this->coreFields)
+                && !array_key_exists($fieldName, $this->customFields)) {
+                echo "$fieldName<br />";
+            }
+        }
     }
 
     /**
