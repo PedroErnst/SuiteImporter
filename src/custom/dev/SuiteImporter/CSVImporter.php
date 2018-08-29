@@ -81,7 +81,7 @@ class CSVImporter
     public function loadParameters()
     {
         foreach ($this->parameters as $name => $value) {
-            if (!empty($_REQUEST[$name])) {
+            if (isset($_REQUEST[$name])) {
                 $this->parameters[$name] = $_REQUEST[$name];
             }
         }
