@@ -16,7 +16,7 @@ class CSVImporter
     private $emailFields = [];
     private $parameters = [
         'maxRows' => 0,
-        'doNotTruncate' => 0,
+        'doNotTruncate' => 1,
         'frail' => 0,
         'offset' => 0,
         'showUnmapped' => 0,
